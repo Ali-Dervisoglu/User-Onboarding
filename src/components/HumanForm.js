@@ -4,13 +4,14 @@ import * as yup from 'yup';
 import axios from 'axios';
 
 const HumanForm = ({ errors, touched, status }) => {
-    
-    // const [humans, setHumans] = useState([]);
 
-    // useEffect(() => {if (status) {
-    //     setAnimals([ ...animals, status ])
-    //   }
-    // }, [status])
+    const [users, setUsers] = useState([]);
+
+    useEffect(() => {
+        if (status) {
+            setUsers([...users, status])
+        }
+    }, [status])
 
     return (
         <Form>
@@ -26,6 +27,14 @@ const HumanForm = ({ errors, touched, status }) => {
                 <Field type="checkbox" name="termsOfService" />
                 <button type="submit">Submit</button>
             </label>
+
+            {users.map((user) => (
+                <div className="user">
+                    <br></br>
+                    Name: {user.name} <br></br>
+                    Email: {user.email}
+                </div>
+            ))}
         </Form>
     )
 }
@@ -56,4 +65,4 @@ export default withFormik({
                 console.log('Error:', err);
             })
     }
-    })(HumanForm);
+})(HumanForm);
